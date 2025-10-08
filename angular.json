@@ -20,7 +20,9 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/assets"
+                "src/assets",
+                "src/favicon.ico",
+                "staticwebapp.config.json"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
