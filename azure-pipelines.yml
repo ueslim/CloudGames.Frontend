@@ -1,0 +1,40 @@
+# Azure DevOps Pipeline for CloudGames Frontend
+# Alternative to GitHub Actions for Azure DevOps users
+
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  nodeVersion: '18.x'
+  buildConfiguration: 'production'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: $(nodeVersion)
+  displayName: 'Install Node.js'
+
+- script: |
+    npm ci
+  displayName: 'Install dependencies'
+
+- script: |
+    npm run build:prod
+  displayName: 'Build application'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: 'dist/cloudgames-frontend'
+    artifactName: 'webapp'
+  displayName: 'Publish build artifacts'
+
+# Optional: Deploy to Azure Static Web Apps
+# Uncomment and configure if using Azure DevOps for deployment
+# - task: AzureStaticWebApp@0
+#   inputs:
+#     app_location: '/'
+#     output_location: 'dist/cloudgames-frontend'
+#     azure_static_web_apps_api_token: $(AZURE_STATIC_WEB_APPS_API_TOKEN)

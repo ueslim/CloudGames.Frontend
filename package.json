@@ -5,8 +5,11 @@
   "scripts": {
     "start": "ng serve -o",
     "build": "ng build",
+    "build:prod": "ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
   },
   "dependencies": {
     "@angular/animations": "^18.2.0",
