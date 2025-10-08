@@ -10,7 +10,7 @@ import { SharedModule } from './shared/shared.module';
 import { JwtInterceptor } from './shared/interceptors/jwt.interceptor';
 import { CorrelationIdInterceptor } from './shared/interceptors/correlation-id.interceptor';
 import { LoggingInterceptor } from './shared/interceptors/logging.interceptor';
-import { ApiKeyInterceptor } from './api-key.interceptor';
+import { ApiKeyInterceptor } from './shared/interceptors/api-key.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
