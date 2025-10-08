@@ -10,6 +10,7 @@ import { SharedModule } from './shared/shared.module';
 import { JwtInterceptor } from './shared/interceptors/jwt.interceptor';
 import { CorrelationIdInterceptor } from './shared/interceptors/correlation-id.interceptor';
 import { LoggingInterceptor } from './shared/interceptors/logging.interceptor';
+import { ApiKeyInterceptor } from './api-key.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +20,7 @@ import { LoggingInterceptor } from './shared/interceptors/logging.interceptor';
     { provide: HTTP_INTERCEPTORS, useClass: CorrelationIdInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true },
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    { provide: HTTP_INTERCEPTORS, useClass: ApiKeyInterceptor, multi: true },
     JwtHelperService,
   ],
   bootstrap: [AppComponent],
