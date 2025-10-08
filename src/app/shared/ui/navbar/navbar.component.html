@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">CloudGames</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto" *ngIf="(isAuthenticated$ | async); else anon">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/games">Games</a>
+        </li>
+        <li class="nav-item" *ngIf="isAdmin">
+          <a class="nav-link" routerLink="/games/admin/new">Register Game</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/payments">Payments</a>
+        </li>
+      </ul>
+      <ng-template #anon>
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/auth/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/auth/register">Register</a>
+          </li>
+        </ul>
+      </ng-template>
+
+      <div class="d-flex align-items-center" *ngIf="(isAuthenticated$ | async)">
+        <span class="navbar-text me-3" *ngIf="(currentUser$ | async) as user">{{ user.name || user.email }}</span>
+        <button class="btn btn-outline-light" (click)="logout()">Logout</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+

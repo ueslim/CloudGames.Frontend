@@ -1,0 +1,35 @@
+<div *ngIf="loading" class="d-flex justify-content-center my-5">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <span class="ms-2 align-self-center">Loading games...</span>
+</div>
+
+<div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+<div *ngIf="!loading && !error">
+  <div *ngIf="games.length === 0" class="text-muted">No games found</div>
+
+  <div class="row" *ngIf="games.length > 0">
+    <div class="col-md-4 mb-3" *ngFor="let g of games">
+      <div class="card h-100">
+        <img *ngIf="g.coverImageUrl" [src]="g.coverImageUrl" class="card-img-top" [alt]="g.title">
+        <div class="card-body">
+          <h5 class="card-title d-flex justify-content-between">
+            <span>{{ g.title }}</span>
+            <span class="badge bg-primary">{{ g.price | currency }}</span>
+          </h5>
+          <p class="card-text mb-1"><strong>Genre:</strong> {{ g.genre }}</p>
+          <div class="mb-2">
+            <span class="badge bg-secondary me-1" *ngFor="let t of g.tags">{{ t }}</span>
+          </div>
+        </div>
+        <div class="card-footer bg-transparent border-0">
+          <a class="btn btn-outline-primary w-100" [routerLink]="['/games', g.id]">Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

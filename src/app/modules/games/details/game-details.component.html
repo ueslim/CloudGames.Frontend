@@ -1,0 +1,47 @@
+<div *ngIf="loading" class="d-flex justify-content-center my-5">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <span class="ms-2 align-self-center">Loading game...</span>
+</div>
+
+<div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+<div *ngIf="notFound" class="alert alert-warning">Game not found</div>
+
+<div *ngIf="!loading && game" class="card">
+  <div class="row g-0">
+    <div class="col-md-5">
+      <img *ngIf="game.coverImageUrl" [src]="game.coverImageUrl" class="img-fluid rounded-start w-100 h-100 object-fit-cover" [alt]="game.title">
+    </div>
+    <div class="col-md-7">
+      <div class="card-body">
+        <h3 class="card-title d-flex justify-content-between align-items-center">
+          <span>{{ game.title }}</span>
+          <span class="badge bg-primary fs-6">{{ game.price | currency }}</span>
+        </h3>
+        <p class="card-text">{{ game.description }}</p>
+        <div class="row">
+          <div class="col-sm-6 mb-2"><strong>Developer:</strong> {{ game.developer }}</div>
+          <div class="col-sm-6 mb-2"><strong>Publisher:</strong> {{ game.publisher }}</div>
+          <div class="col-sm-6 mb-2"><strong>Release date:</strong> {{ game.releaseDate | date }}</div>
+          <div class="col-sm-6 mb-2"><strong>Genre:</strong> {{ game.genre }}</div>
+        </div>
+        <div class="mb-2">
+          <span class="badge bg-secondary me-1" *ngFor="let t of game.tags">{{ t }}</span>
+        </div>
+        <div *ngIf="purchaseError" class="alert alert-danger mt-2">{{ purchaseError }}</div>
+      </div>
+      <div class="card-footer bg-transparent border-0 p-3">
+        <button class="btn btn-success w-100 d-flex align-items-center justify-content-center" [disabled]="purchasing" (click)="buy()">
+          <span *ngIf="!purchasing">Buy</span>
+          <span *ngIf="purchasing" class="d-flex align-items-center">
+            <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+            Starting purchase...
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
