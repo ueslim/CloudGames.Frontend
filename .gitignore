@@ -1,0 +1,67 @@
+# ---- Node / Angular ----
+
+# Dependencies
+node_modules/
+jspm_packages/
+
+# Builds / Outputs
+dist/
+build/
+tmp/
+temp/
+out/
+out-tsc/
+
+# Angular cache
+.angular/
+.angular/cache/
+
+# Coverage
+coverage/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.log
+
+# Environment files
+.env
+.env.*.local
+.env.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editors / IDEs
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.history/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# Test artifacts
+cypress/screenshots/
+cypress/videos/
+playwright-report/
+test-results/
+
+# Misc cache
+.sass-cache/
+*.tsbuildinfo
+
+# Package archives
+*.tgz
+*.zip
+
+
