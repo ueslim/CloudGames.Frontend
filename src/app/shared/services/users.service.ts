@@ -13,7 +13,7 @@ export interface User {
   id: string;
   name?: string;
   email: string;
-  // other fields can be added as needed
+  // outros campos podem ser adicionados conforme necessário
 }
 
 export interface AuthRequest {
@@ -27,23 +27,27 @@ export interface AuthResponse {
 
 @Injectable({ providedIn: 'root' })
 export class UsersService {
-  private readonly baseUrl = `${environment.USERS_API}/api/users`;
+  private readonly baseUrl = `${environment.USERS_API}`;
 
   constructor(private http: HttpClient) {}
 
+  // Cadastro de usuário
   register(payload: RegisterRequest): Observable<void> {
-    return this.http.post<void>(`${this.baseUrl}`, payload);
+    return this.http.post<void>(`${this.baseUrl}/users`, payload);
   }
 
+  // Autenticação (login)
   authenticate(payload: AuthRequest): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.baseUrl}/authenticate`, payload);
+    return this.http.post<AuthResponse>(`${this.baseUrl}/users/authenticate`, payload);
   }
 
+  // Obter usuário logado
   getMe(): Observable<User> {
-    // Primary: AuthController `/api/auth/me` (as per backend routes)
-    const primaryUrl = `${environment.USERS_API}/api/auth/me`;
-    // Fallback: older route pattern `/api/users/me`
-    const fallbackUrl = `${this.baseUrl}/me`;
+    // Rota principal: AuthController `/api/auth/me`
+    const primaryUrl = `${this.baseUrl}/auth/me`;
+    // Fallback: rota mais antiga `/api/users/me`
+    const fallbackUrl = `${this.baseUrl}/users/me`;
+
     return this.http.get<User>(primaryUrl).pipe(
       catchError((err) => {
         if (err?.status === 404 || err?.status === 405) {
@@ -54,5 +58,3 @@ export class UsersService {
     );
   }
 }
-
-
