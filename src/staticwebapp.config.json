@@ -1,14 +1,6 @@
 {
   "navigationFallback": {
     "rewrite": "/index.html",
-    "exclude": ["/assets/*", "/*.css", "/*.js", "/*.png", "/*.jpg", "/*.ico"]
-  },
-  "mimeTypes": {
-    ".json": "application/json"
-  },
-  "globalHeaders": {
-    "X-Content-Type-Options": "nosniff",
-    "X-Frame-Options": "DENY",
-    "X-XSS-Protection": "1; mode=block"
+    "exclude": ["/assets/*", "/*.css", "/*.png", "/*.jpg", "/*.ico"]
   }
 }
