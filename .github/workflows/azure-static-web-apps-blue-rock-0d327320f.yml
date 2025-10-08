@@ -15,8 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     permissions:
-       id-token: write
-       contents: read
+        id-token: write
+        contents: read
     steps:
       - uses: actions/checkout@v3
         with:
@@ -30,10 +30,10 @@ jobs:
         uses: actions/github-script@v6
         id: idtoken
         with:
-           script: |
-               const coredemo = require('@actions/core')
-               return await coredemo.getIDToken()
-           result-encoding: string
+            script: |
+                const coredemo = require('@actions/core')
+                return await coredemo.getIDToken()
+            result-encoding: string
 
       - name: Build And Deploy
         id: builddeploy
@@ -45,6 +45,7 @@ jobs:
           app_location: "/" # raiz do projeto Angular
           api_location: "" # se não tiver backend, deixa vazio
           output_location: "dist/cloudgames-frontend" # pasta gerada pelo ng build
+          app_build_command: "ng build --configuration production" # <-- A ÚNICA LINHA ADICIONADA
           github_id_token: ${{ steps.idtoken.outputs.result }}
           ###### End of Repository/Build Configurations ######
 
