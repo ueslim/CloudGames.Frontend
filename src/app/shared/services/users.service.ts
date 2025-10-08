@@ -27,26 +27,36 @@ export interface AuthResponse {
 
 @Injectable({ providedIn: 'root' })
 export class UsersService {
+  // A baseUrl já é '.../users'
   private readonly baseUrl = `${environment.USERS_API}`;
 
   constructor(private http: HttpClient) {}
 
   // Cadastro de usuário
   register(payload: RegisterRequest): Observable<void> {
-    return this.http.post<void>(`${this.baseUrl}/users`, payload);
+    // CORRIGIDO: A rota para criar um usuário é o próprio /users (a baseUrl).
+    // Antes estava: `${this.baseUrl}/users`, o que gerava /users/users
+    return this.http.post<void>(this.baseUrl, payload);
   }
 
   // Autenticação (login)
   authenticate(payload: AuthRequest): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.baseUrl}/users/authenticate`, payload);
+    // CORRIGIDO: Removemos o /users duplicado.
+    // Antes estava: `${this.baseUrl}/users/authenticate`, o que gerava /users/users/authenticate
+    return this.http.post<AuthResponse>(`${this.baseUrl}/authenticate`, payload);
   }
 
   // Obter usuário logado
   getMe(): Observable<User> {
     // Rota principal: AuthController `/api/auth/me`
-    const primaryUrl = `${this.baseUrl}/auth/me`;
+    // CORRIGIDO: A rota de autenticação não deve ter /users. Trocamos /users por /auth.
+    // Antes estava: `${this.baseUrl}/auth/me`, o que gerava /users/auth/me
+    const primaryUrl = this.baseUrl.replace('/users', '/auth/me');
+    
     // Fallback: rota mais antiga `/api/users/me`
-    const fallbackUrl = `${this.baseUrl}/users/me`;
+    // CORRIGIDO: Removemos o /users duplicado.
+    // Antes estava: `${this.baseUrl}/users/me`, o que gerava /users/users/me
+    const fallbackUrl = `${this.baseUrl}/me`;
 
     return this.http.get<User>(primaryUrl).pipe(
       catchError((err) => {
