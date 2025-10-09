@@ -30,7 +30,7 @@ export interface CreateGameDto {
 
 @Injectable({ providedIn: 'root' })
 export class GamesService {
-  private readonly baseUrl = `${environment.GAMES_API}/api/games`;
+  private readonly baseUrl = environment.GAMES_API;
 
   constructor(private http: HttpClient) {}
 
