@@ -13,6 +13,11 @@ const routes: Routes = [
     loadChildren: () => import('./modules/games/games.module').then(m => m.GamesModule),
   },
   {
+    path: 'promotions',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./modules/promotions/promotions.module').then(m => m.PromotionsModule),
+  },
+  {
     path: 'payments',
     canActivate: [AuthGuard],
     loadChildren: () => import('./modules/payments/payments.module').then(m => m.PaymentsModule),

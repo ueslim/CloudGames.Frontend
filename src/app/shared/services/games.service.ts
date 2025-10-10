@@ -54,6 +54,18 @@ export class GamesService {
   create(payload: CreateGameDto): Observable<GameDto> {
     return this.http.post<GameDto>(`${this.baseUrl}`, payload);
   }
+
+  search(query: string): Observable<GameDto[]> {
+    return this.http.get<GameDto[]>(`${this.baseUrl}/search`, { params: { query } });
+  }
+
+  update(id: string, payload: Partial<CreateGameDto>): Observable<GameDto> {
+    return this.http.put<GameDto>(`${this.baseUrl}/${id}`, payload);
+  }
+
+  delete(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  }
 }
 
 
