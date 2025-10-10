@@ -18,11 +18,8 @@ export class NavbarComponent {
     const token = this.auth.getToken();
     if (!token || this.jwtHelper.isTokenExpired(token)) return false;
     const decoded: any = this.jwtHelper.decodeToken(token);
-    const rawRole = decoded?.role ?? decoded?.roles ?? decoded?.['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
-    let roles: string[] = [];
-    if (Array.isArray(rawRole)) roles = rawRole as string[];
-    else if (typeof rawRole === 'string') roles = [rawRole];
-    return roles.includes('Administrator');
+    const role = decoded?.role ?? decoded?.['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+    return role === 'Administrator';
   }
 
   logout() {

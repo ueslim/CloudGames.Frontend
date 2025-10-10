@@ -17,6 +17,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./modules/payments/payments.module').then(m => m.PaymentsModule),
   },
+  {
+    path: 'profile',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./modules/profile/profile.module').then(m => m.ProfileModule),
+  },
   { path: '', redirectTo: 'games', pathMatch: 'full' },
   { path: '**', redirectTo: 'games' },
 ];

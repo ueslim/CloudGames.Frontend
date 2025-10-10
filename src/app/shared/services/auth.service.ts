@@ -55,6 +55,7 @@ export class AuthService {
         id: decoded?.sub || decoded?.nameid || decoded?.uid || '',
         name: decoded?.name || decoded?.given_name || decoded?.unique_name,
         email: decoded?.email || decoded?.upn || decoded?.preferred_username || '',
+        role: decoded?.role || decoded?.['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] || ''
       };
       if (seedUser.email || seedUser.name) {
         this.currentUserSubject.next(seedUser);
@@ -72,6 +73,19 @@ export class AuthService {
         return of(this.currentUserSubject.value);
       })
     );
+  }
+
+  getUserRole(): string | null {
+    const token = this.getToken();
+    if (!token || this.jwtHelper.isTokenExpired(token)) {
+      return null;
+    }
+    try {
+      const decoded: any = this.jwtHelper.decodeToken(token);
+      return decoded?.role || decoded?.['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] || null;
+    } catch {
+      return null;
+    }
   }
 }
 

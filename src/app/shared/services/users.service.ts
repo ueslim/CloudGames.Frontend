@@ -13,7 +13,10 @@ export interface User {
   id: string;
   name?: string;
   email: string;
-  // outros campos podem ser adicionados conforme necessário
+  role?: string;
+  isActive?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface AuthRequest {
@@ -23,6 +26,13 @@ export interface AuthRequest {
 
 export interface AuthResponse {
   token: string;
+}
+
+export interface UpdateUserRequest {
+  name: string;
+  email: string;
+  role?: string;
+  isActive?: boolean;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -66,5 +76,20 @@ export class UsersService {
         return throwError(() => err);
       })
     );
+  }
+
+  // Obter usuário por ID
+  getUserById(id: string): Observable<User> {
+    return this.http.get<User>(`${this.baseUrl}/${id}`);
+  }
+
+  // Obter todos os usuários (Admin only)
+  getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.baseUrl);
+  }
+
+  // Atualizar usuário
+  updateUser(id: string, payload: UpdateUserRequest): Observable<User> {
+    return this.http.put<User>(`${this.baseUrl}/${id}`, payload);
   }
 }
