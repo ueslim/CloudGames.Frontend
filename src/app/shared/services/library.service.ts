@@ -6,7 +6,7 @@ import { GameDto } from './games.service';
 
 @Injectable({ providedIn: 'root' })
 export class LibraryService {
-  private readonly baseUrl = environment.GAMES_API.replace('/games', '/users');
+  private readonly baseUrl = environment.USERS_API;
 
   constructor(private http: HttpClient) {}
 

@@ -22,7 +22,7 @@ export interface CreatePromotionDto {
 
 @Injectable({ providedIn: 'root' })
 export class PromotionsService {
-  private readonly baseUrl = environment.GAMES_API.replace('/games', '/promotions');
+  private readonly baseUrl = environment.PROMOTIONS_API;
 
   constructor(private http: HttpClient) {}
 

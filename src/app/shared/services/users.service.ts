@@ -37,36 +37,28 @@ export interface UpdateUserRequest {
 
 @Injectable({ providedIn: 'root' })
 export class UsersService {
-  // A baseUrl já é '.../users'
-  private readonly baseUrl = `${environment.USERS_API}`;
+  private readonly usersUrl = environment.USERS_API;
+  private readonly authUrl = environment.AUTH_API;
 
   constructor(private http: HttpClient) {}
 
-  // Cadastro de usuário
+  // User registration
   register(payload: RegisterRequest): Observable<void> {
-    // CORRIGIDO: A rota para criar um usuário é o próprio /users (a baseUrl).
-    // Antes estava: `${this.baseUrl}/users`, o que gerava /users/users
-    return this.http.post<void>(this.baseUrl, payload);
+    return this.http.post<void>(this.usersUrl, payload);
   }
 
-  // Autenticação (login)
+  // Authentication (login)
   authenticate(payload: AuthRequest): Observable<AuthResponse> {
-    // CORRIGIDO: Removemos o /users duplicado.
-    // Antes estava: `${this.baseUrl}/users/authenticate`, o que gerava /users/users/authenticate
-    return this.http.post<AuthResponse>(`${this.baseUrl}/authenticate`, payload);
+    return this.http.post<AuthResponse>(`${this.usersUrl}/authenticate`, payload);
   }
 
-  // Obter usuário logado
+  // Get current logged in user
   getMe(): Observable<User> {
-    // Rota principal: AuthController `/api/auth/me`
-    // CORRIGIDO: A rota de autenticação não deve ter /users. Trocamos /users por /auth.
-    // Antes estava: `${this.baseUrl}/auth/me`, o que gerava /users/auth/me
-    const primaryUrl = this.baseUrl.replace('/users', '/auth/me');
+    // Primary route: AuthController `/api/auth/me`
+    const primaryUrl = `${this.authUrl}/me`;
     
-    // Fallback: rota mais antiga `/api/users/me`
-    // CORRIGIDO: Removemos o /users duplicado.
-    // Antes estava: `${this.baseUrl}/users/me`, o que gerava /users/users/me
-    const fallbackUrl = `${this.baseUrl}/me`;
+    // Fallback: older route `/api/users/me`
+    const fallbackUrl = `${this.usersUrl}/me`;
 
     return this.http.get<User>(primaryUrl).pipe(
       catchError((err) => {
@@ -78,18 +70,18 @@ export class UsersService {
     );
   }
 
-  // Obter usuário por ID
+  // Get user by ID
   getUserById(id: string): Observable<User> {
-    return this.http.get<User>(`${this.baseUrl}/${id}`);
+    return this.http.get<User>(`${this.usersUrl}/${id}`);
   }
 
-  // Obter todos os usuários (Admin only)
+  // Get all users (Admin only)
   getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.baseUrl);
+    return this.http.get<User[]>(this.usersUrl);
   }
 
-  // Atualizar usuário
+  // Update user
   updateUser(id: string, payload: UpdateUserRequest): Observable<User> {
-    return this.http.put<User>(`${this.baseUrl}/${id}`, payload);
+    return this.http.put<User>(`${this.usersUrl}/${id}`, payload);
   }
 }

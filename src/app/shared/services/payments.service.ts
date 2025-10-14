@@ -7,7 +7,7 @@ export type PaymentStatus = 'Pending' | 'Approved' | 'Declined';
 
 @Injectable({ providedIn: 'root' })
 export class PaymentsService {
-  private readonly baseUrl = `${environment.PAYMENTS_API}/api/payments`;
+  private readonly baseUrl = environment.PAYMENTS_API;
 
   constructor(private http: HttpClient) {}
 
