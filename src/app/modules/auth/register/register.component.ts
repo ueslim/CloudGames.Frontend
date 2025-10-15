@@ -32,7 +32,10 @@ export class RegisterComponent {
         setTimeout(() => this.router.navigate(['/auth/login']), 2000);
       },
       error: (err) => {
-        this.error = err?.error?.message || 'Falha no registro';
+        const detail = (err?.error?.detail || err?.error?.message || '').toLowerCase();
+        this.error = detail.includes('already in use')
+          ? 'Este email já está cadastrado no sistema'
+          : err?.error?.detail || err?.error?.message || 'Falha no registro';
         this.loading = false;
       },
     });

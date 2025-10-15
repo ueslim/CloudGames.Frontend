@@ -27,7 +27,12 @@ export class LoginComponent {
         this.router.navigate(['/games']);
       },
       error: (err) => {
-        this.error = err?.error?.message || 'Falha no login';
+        const detail = (err?.error?.detail || err?.error?.message || '').toLowerCase();
+        this.error = detail.includes('not registered') || detail.includes('not found') 
+          ? 'Usuário não cadastrado no sistema'
+          : detail.includes('password')
+          ? 'Senha incorreta'
+          : err?.error?.detail || err?.error?.message || 'Falha no login';
         this.loading = false;
       },
     });
