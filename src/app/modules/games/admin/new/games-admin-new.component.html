@@ -1,63 +1,63 @@
 <div class="card">
   <div class="card-body">
-    <h4 class="card-title mb-3">Register Game</h4>
+    <h4 class="card-title mb-3">Cadastrar Jogo</h4>
 
     <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
 
     <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
       <div class="row g-3">
         <div class="col-md-6">
-          <label class="form-label">Title</label>
+          <label class="form-label">Título</label>
           <input class="form-control" formControlName="title">
-          <div class="text-danger" *ngIf="form.controls.title.touched && form.controls.title.invalid">Title is required</div>
+          <div class="text-danger" *ngIf="form.controls.title.touched && form.controls.title.invalid">Título é obrigatório</div>
         </div>
         <div class="col-md-6">
-          <label class="form-label">Genre</label>
+          <label class="form-label">Gênero</label>
           <input class="form-control" formControlName="genre">
-          <div class="text-danger" *ngIf="form.controls.genre.touched && form.controls.genre.invalid">Genre is required</div>
+          <div class="text-danger" *ngIf="form.controls.genre.touched && form.controls.genre.invalid">Gênero é obrigatório</div>
         </div>
         <div class="col-12">
-          <label class="form-label">Description</label>
+          <label class="form-label">Descrição</label>
           <textarea class="form-control" rows="4" formControlName="description"></textarea>
-          <div class="text-danger" *ngIf="form.controls.description.touched && form.controls.description.invalid">Description is required</div>
+          <div class="text-danger" *ngIf="form.controls.description.touched && form.controls.description.invalid">Descrição é obrigatória</div>
         </div>
         <div class="col-md-6">
-          <label class="form-label">Developer</label>
+          <label class="form-label">Desenvolvedor</label>
           <input class="form-control" formControlName="developer">
-          <div class="text-danger" *ngIf="form.controls.developer.touched && form.controls.developer.invalid">Developer is required</div>
+          <div class="text-danger" *ngIf="form.controls.developer.touched && form.controls.developer.invalid">Desenvolvedor é obrigatório</div>
         </div>
         <div class="col-md-6">
-          <label class="form-label">Publisher</label>
+          <label class="form-label">Publicador</label>
           <input class="form-control" formControlName="publisher">
-          <div class="text-danger" *ngIf="form.controls.publisher.touched && form.controls.publisher.invalid">Publisher is required</div>
+          <div class="text-danger" *ngIf="form.controls.publisher.touched && form.controls.publisher.invalid">Publicador é obrigatório</div>
         </div>
         <div class="col-md-6">
-          <label class="form-label">Release Date</label>
+          <label class="form-label">Data de Lançamento</label>
           <input type="date" class="form-control" formControlName="releaseDate">
-          <div class="text-danger" *ngIf="form.controls.releaseDate.touched && form.controls.releaseDate.invalid">Release date is required</div>
+          <div class="text-danger" *ngIf="form.controls.releaseDate.touched && form.controls.releaseDate.invalid">Data de lançamento é obrigatória</div>
         </div>
         <div class="col-md-3">
-          <label class="form-label">Price</label>
+          <label class="form-label">Preço</label>
           <input type="number" min="0.01" step="0.01" class="form-control" formControlName="price">
-          <div class="text-danger" *ngIf="form.controls.price.touched && form.controls.price.invalid">Price must be greater than zero</div>
+          <div class="text-danger" *ngIf="form.controls.price.touched && form.controls.price.invalid">Preço deve ser maior que zero</div>
         </div>
         <div class="col-md-3">
-          <label class="form-label">Cover Image URL</label>
+          <label class="form-label">URL da Capa</label>
           <input class="form-control" formControlName="coverImageUrl">
-          <div class="text-danger" *ngIf="form.controls.coverImageUrl.touched && form.controls.coverImageUrl.invalid">Cover Image URL is required</div>
+          <div class="text-danger" *ngIf="form.controls.coverImageUrl.touched && form.controls.coverImageUrl.invalid">URL da capa é obrigatória</div>
         </div>
         <div class="col-12">
-          <label class="form-label">Tags (comma-separated)</label>
-          <input class="form-control" formControlName="tags" placeholder="action, indie, multiplayer">
+          <label class="form-label">Tags (separadas por vírgula)</label>
+          <input class="form-control" formControlName="tags" placeholder="ação, indie, multiplayer">
         </div>
       </div>
 
       <div class="mt-4 d-flex align-items-center">
         <button class="btn btn-primary" type="submit" [disabled]="form.invalid || saving">
           <span *ngIf="saving" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-          Save
+          Salvar
         </button>
-        <a class="btn btn-link ms-2" routerLink="/games">Cancel</a>
+        <a class="btn btn-link ms-2" routerLink="/games">Cancelar</a>
       </div>
     </form>
   </div>

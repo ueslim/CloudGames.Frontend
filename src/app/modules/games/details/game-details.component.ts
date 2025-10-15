@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { GamesService, GameDto } from '../../../shared/services/games.service';
 
 @Component({
@@ -14,7 +15,12 @@ export class GameDetailsComponent implements OnInit {
   purchasing = false;
   purchaseError: string | null = null;
 
-  constructor(private route: ActivatedRoute, private gamesService: GamesService, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute, 
+    private gamesService: GamesService, 
+    private router: Router,
+    private location: Location
+  ) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id')!;
@@ -27,7 +33,7 @@ export class GameDetailsComponent implements OnInit {
         if (err && err.status === 404) {
           this.notFound = true;
         } else {
-          this.error = 'Failed to load game';
+          this.error = 'Falha ao carregar o jogo';
         }
         this.loading = false;
       },
@@ -44,15 +50,19 @@ export class GameDetailsComponent implements OnInit {
         if (paymentId) {
           this.router.navigate(['/payments', paymentId]);
         } else {
-          this.purchaseError = 'Unexpected response from server.';
+          this.purchaseError = 'Resposta inesperada do servidor.';
           this.purchasing = false;
         }
       },
       error: () => {
-        this.purchaseError = 'Could not start the purchase. Please try again.';
+        this.purchaseError = 'Não foi possível iniciar a compra. Por favor, tente novamente.';
         this.purchasing = false;
       },
     });
+  }
+
+  goBack() {
+    this.location.back();
   }
 }
 

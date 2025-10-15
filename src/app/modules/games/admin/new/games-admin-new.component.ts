@@ -54,7 +54,7 @@ export class GamesAdminNewComponent {
         this.router.navigate(['/games']);
       },
       error: (err) => {
-        this.error = err?.error?.message || 'Failed to create game';
+        this.error = err?.error?.message || 'Falha ao criar jogo';
         this.saving = false;
       },
     });

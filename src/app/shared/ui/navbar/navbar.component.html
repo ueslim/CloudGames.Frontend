@@ -28,17 +28,17 @@
       <ng-template #anon>
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <a class="nav-link" routerLink="/auth/login">Login</a>
+            <a class="nav-link" routerLink="/auth/login">Entrar</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/auth/register">Register</a>
+            <a class="nav-link" routerLink="/auth/register">Registrar</a>
           </li>
         </ul>
       </ng-template>
 
       <div class="d-flex align-items-center" *ngIf="(isAuthenticated$ | async)">
         <span class="navbar-text me-3" *ngIf="(currentUser$ | async) as user">{{ user.name || user.email }}</span>
-        <button class="btn btn-outline-light" (click)="logout()">Logout</button>
+        <button class="btn btn-outline-light" (click)="logout()">Sair</button>
       </div>
     </div>
   </div>

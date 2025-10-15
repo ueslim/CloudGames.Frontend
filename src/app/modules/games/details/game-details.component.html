@@ -1,11 +1,11 @@
 <app-loading-spinner 
   *ngIf="loading" 
-  message="Loading game details..." 
+  message="Carregando detalhes do jogo..." 
   size="lg">
 </app-loading-spinner>
 
 <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
-<div *ngIf="notFound" class="alert alert-warning">Game not found</div>
+<div *ngIf="notFound" class="alert alert-warning">Jogo não encontrado</div>
 
 <div *ngIf="!loading && game" class="card">
   <div class="row g-0">
@@ -20,10 +20,10 @@
         </h3>
         <p class="card-text">{{ game.description }}</p>
         <div class="row">
-          <div class="col-sm-6 mb-2"><strong>Developer:</strong> {{ game.developer }}</div>
-          <div class="col-sm-6 mb-2"><strong>Publisher:</strong> {{ game.publisher }}</div>
-          <div class="col-sm-6 mb-2"><strong>Release date:</strong> {{ game.releaseDate | date }}</div>
-          <div class="col-sm-6 mb-2"><strong>Genre:</strong> {{ game.genre }}</div>
+          <div class="col-sm-6 mb-2"><strong>Desenvolvedor:</strong> {{ game.developer }}</div>
+          <div class="col-sm-6 mb-2"><strong>Publicador:</strong> {{ game.publisher }}</div>
+          <div class="col-sm-6 mb-2"><strong>Data de lançamento:</strong> {{ game.releaseDate | date }}</div>
+          <div class="col-sm-6 mb-2"><strong>Gênero:</strong> {{ game.genre }}</div>
         </div>
         <div class="mb-2">
           <span class="badge bg-secondary me-1" *ngFor="let t of game.tags">{{ t }}</span>
@@ -31,13 +31,18 @@
         <div *ngIf="purchaseError" class="alert alert-danger mt-2">{{ purchaseError }}</div>
       </div>
       <div class="card-footer bg-transparent border-0 p-3">
-        <button class="btn btn-success w-100 d-flex align-items-center justify-content-center" [disabled]="purchasing" (click)="buy()">
-          <span *ngIf="!purchasing">Buy</span>
-          <span *ngIf="purchasing" class="d-flex align-items-center">
-            <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-            Starting purchase...
-          </span>
-        </button>
+        <div class="d-flex gap-2">
+          <button class="btn btn-outline-secondary" (click)="goBack()">
+            <i class="bi bi-arrow-left me-1"></i> Voltar
+          </button>
+          <button class="btn btn-success flex-grow-1 d-flex align-items-center justify-content-center" [disabled]="purchasing" (click)="buy()">
+            <span *ngIf="!purchasing">Comprar</span>
+            <span *ngIf="purchasing" class="d-flex align-items-center">
+              <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+              Iniciando compra...
+            </span>
+          </button>
+        </div>
       </div>
     </div>
   </div>

@@ -20,7 +20,7 @@ export class GamesListComponent implements OnInit {
         this.loading = false;
       },
       error: () => {
-        this.error = 'Failed to load games';
+        this.error = 'Falha ao carregar jogos';
         this.loading = false;
       },
     });

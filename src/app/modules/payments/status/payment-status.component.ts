@@ -24,7 +24,7 @@ export class PaymentStatusComponent implements OnInit, OnDestroy {
         switchMap(() => this.payments.getStatus(id).pipe(
           tap(() => { this.error = null; }),
           catchError(() => {
-            this.error = 'Failed to get payment status. Retrying...';
+            this.error = 'Falha ao obter status do pagamento. Tentando novamente...';
             return of({ status: 'Pending' as PaymentStatus });
           })
         ))
