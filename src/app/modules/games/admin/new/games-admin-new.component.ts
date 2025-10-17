@@ -15,13 +15,11 @@ export class GamesAdminNewComponent {
   form = this.fb.nonNullable.group({
     title: ['', [Validators.required, Validators.maxLength(100)]],
     description: ['', [Validators.required, Validators.maxLength(2000)]],
-    developer: ['', [Validators.required, Validators.maxLength(100)]],
     publisher: ['', [Validators.required, Validators.maxLength(100)]],
     releaseDate: ['', [Validators.required]],
     genre: ['', [Validators.required, Validators.maxLength(50)]],
     price: [0, [Validators.required, Validators.min(0.01)]],
-    coverImageUrl: ['', [Validators.required]],
-    tags: ['', []],
+    coverImageUrl: [''],
   });
 
   constructor(private fb: FormBuilder, private games: GamesService, private router: Router) {}
@@ -35,16 +33,11 @@ export class GamesAdminNewComponent {
     const payload: CreateGameDto = {
       title: raw.title,
       description: raw.description,
-      developer: raw.developer,
       publisher: raw.publisher,
       releaseDate: new Date(raw.releaseDate),
       genre: raw.genre,
       price: Number(raw.price),
-      coverImageUrl: raw.coverImageUrl?.match(/^https?:\/\//i) ? raw.coverImageUrl : `https://${raw.coverImageUrl}`,
-      tags: (raw.tags || '')
-        .split(',')
-        .map(t => t.trim())
-        .filter(t => !!t),
+      coverImageUrl: raw.coverImageUrl?.trim() || undefined,
     };
 
     this.games.create(payload).subscribe({

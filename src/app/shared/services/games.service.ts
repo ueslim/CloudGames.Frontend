@@ -7,25 +7,21 @@ export interface GameDto {
   id: string;
   title: string;
   description: string;
-  developer: string;
   publisher: string;
   releaseDate: string;
   genre: string;
   price: number;
-  coverImageUrl: string;
-  tags: string[];
+  coverImageUrl?: string;
 }
 
 export interface CreateGameDto {
   title: string;
   description: string;
-  developer: string;
   publisher: string;
   releaseDate: Date;
   genre: string;
   price: number;
-  coverImageUrl: string;
-  tags: string[];
+  coverImageUrl?: string;
 }
 
 @Injectable({ providedIn: 'root' })

@@ -16,17 +16,13 @@
       <div class="card-body">
         <h3 class="card-title d-flex justify-content-between align-items-center">
           <span>{{ game.title }}</span>
-          <span class="badge bg-primary fs-6">{{ game.price | currency }}</span>
+          <span class="badge bg-primary fs-6">{{ game.price | currency: 'BRL' }}</span>
         </h3>
         <p class="card-text">{{ game.description }}</p>
         <div class="row">
-          <div class="col-sm-6 mb-2"><strong>Desenvolvedor:</strong> {{ game.developer }}</div>
           <div class="col-sm-6 mb-2"><strong>Publicador:</strong> {{ game.publisher }}</div>
           <div class="col-sm-6 mb-2"><strong>Data de lançamento:</strong> {{ game.releaseDate | date }}</div>
           <div class="col-sm-6 mb-2"><strong>Gênero:</strong> {{ game.genre }}</div>
-        </div>
-        <div class="mb-2">
-          <span class="badge bg-secondary me-1" *ngFor="let t of game.tags">{{ t }}</span>
         </div>
         <div *ngIf="purchaseError" class="alert alert-danger mt-2">{{ purchaseError }}</div>
       </div>
