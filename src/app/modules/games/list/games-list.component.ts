@@ -16,7 +16,7 @@ export class GamesListComponent implements OnInit {
   ngOnInit(): void {
     this.gamesService.getAll().subscribe({
       next: (items) => {
-        this.games = items;
+        this.games = items.sort((a, b) => a.title.localeCompare(b.title));
         this.loading = false;
       },
       error: () => {
