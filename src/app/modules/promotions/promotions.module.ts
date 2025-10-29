@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../../shared/shared.module';
 import { PromotionsListComponent } from './list/promotions-list.component';
 import { PromotionsCreateComponent } from './create/promotions-create.component';
-import { AuthGuard } from '../../shared/guards/auth.guard';
 import { AdminGuard } from '../../shared/guards/admin.guard';
 
 const routes: Routes = [
@@ -16,4 +15,3 @@ const routes: Routes = [
   imports: [SharedModule, RouterModule.forChild(routes)],
 })
 export class PromotionsModule {}
-

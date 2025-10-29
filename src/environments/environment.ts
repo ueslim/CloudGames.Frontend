@@ -7,5 +7,3 @@ export const environment = {
   AUTH_API: '/api/auth',
   APIM_SUBSCRIPTION_KEY: ''
 };
-
-

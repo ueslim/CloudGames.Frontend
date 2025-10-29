@@ -24,5 +24,3 @@ import { GlobalLoadingComponent } from './ui/global-loading/global-loading.compo
   ],
 })
 export class SharedModule {}
-
-

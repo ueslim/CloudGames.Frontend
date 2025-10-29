@@ -21,4 +21,3 @@ export class CorrelationIdInterceptor implements HttpInterceptor {
   }
 }
 
-

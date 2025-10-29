@@ -13,4 +13,3 @@ const routes: Routes = [
 })
 export class PaymentsModule {}
 
-

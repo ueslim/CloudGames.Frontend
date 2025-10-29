@@ -35,8 +35,6 @@ export class PaymentStatusComponent implements OnInit, OnDestroy {
         if (this.status === 'Approved' || this.status === 'Declined') {
           this.destroyed$.next();
           this.destroyed$.complete();
-          // Optionally navigate back to games on completion
-          // this.router.navigate(['/games']);
         }
       });
   }
@@ -46,5 +44,3 @@ export class PaymentStatusComponent implements OnInit, OnDestroy {
     this.destroyed$.complete();
   }
 }
-
-

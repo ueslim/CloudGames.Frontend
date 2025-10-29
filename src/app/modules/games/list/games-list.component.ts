@@ -30,5 +30,3 @@ export class GamesListComponent implements OnInit {
     this.router.navigate(['/games', game.id]);
   }
 }
-
-

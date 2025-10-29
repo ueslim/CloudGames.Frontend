@@ -14,9 +14,7 @@
             "outputPath": "dist/cloudgames-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -94,5 +92,3 @@
     "analytics": "b6687338-8a6c-4b8f-8f57-0d6713ead4ad"
   }
 }
-
-

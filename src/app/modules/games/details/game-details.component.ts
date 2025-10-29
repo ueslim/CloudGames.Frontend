@@ -65,5 +65,3 @@ export class GameDetailsComponent implements OnInit {
     this.location.back();
   }
 }
-
-
