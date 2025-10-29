@@ -61,9 +61,17 @@
           >
             <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1">{{ game.title }}</h5>
-              <small *ngIf="game.price" class="text-success fw-bold">
-                {{ game.price | currency:'BRL':'symbol':'1.2-2' }}
-              </small>
+              <div class="d-flex align-items-center gap-2">
+                <span *ngIf="game.promotionalPrice" class="badge bg-danger">
+                  -{{ game.discountPercentage }}%
+                </span>
+                <small *ngIf="game.promotionalPrice" class="text-decoration-line-through text-muted">
+                  {{ game.price | currency:'BRL':'symbol':'1.2-2' }}
+                </small>
+                <small *ngIf="game.price" [ngClass]="game.promotionalPrice ? 'text-success fw-bold fs-5' : 'text-success fw-bold'">
+                  {{ (game.promotionalPrice || game.price) | currency:'BRL':'symbol':'1.2-2' }}
+                </small>
+              </div>
             </div>
             <p class="mb-1" *ngIf="game.description">
               {{ game.description.length > 150 ? (game.description | slice:0:150) + '...' : game.description }}

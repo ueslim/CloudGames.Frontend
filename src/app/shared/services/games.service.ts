@@ -12,6 +12,8 @@ export interface GameDto {
   genre: string;
   price: number;
   coverImageUrl?: string;
+  promotionalPrice?: number;
+  discountPercentage?: number;
 }
 
 export interface CreateGameDto {

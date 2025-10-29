@@ -16,7 +16,19 @@
       <div class="card-body">
         <h3 class="card-title d-flex justify-content-between align-items-center">
           <span>{{ game.title }}</span>
-          <span class="badge bg-primary fs-6">{{ game.price | currency: 'BRL' }}</span>
+          <div class="d-flex flex-column align-items-end gap-1">
+            <span *ngIf="game.promotionalPrice" class="badge bg-danger fs-6">
+              -{{ game.discountPercentage }}% OFF
+            </span>
+            <div class="d-flex align-items-center gap-2">
+              <span *ngIf="game.promotionalPrice" class="text-decoration-line-through text-muted">
+                {{ game.price | currency: 'BRL' }}
+              </span>
+              <span class="badge fs-6" [ngClass]="game.promotionalPrice ? 'bg-success' : 'bg-primary'">
+                {{ (game.promotionalPrice || game.price) | currency: 'BRL' }}
+              </span>
+            </div>
+          </div>
         </h3>
         <p class="card-text">{{ game.description }}</p>
         <div class="row">
